@@ -2,7 +2,16 @@ require_relative '../../app/models/blog'
 require 'ostruct'
 
 describe Blog do
+  let(:blog){Blog.new}
   its(:entries){should be_empty}
+  its(:entries){should be_kind_of(Enumerable)}
+
+  describe "#add entry" do
+    let(:entry) {Object.new}
+    it "should add an entry" do
+      expect{blog.add_entry(entry)}.to change {blog.entries.count}.by(1)
+    end
+  end
 end
 
 describe "Blog#new_post" do

@@ -50,5 +50,5 @@ Then /^I should see my blog$/ do
 end
 
 Then /^I should see some entries$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should have_css ".entries .entry", :count => some
 end

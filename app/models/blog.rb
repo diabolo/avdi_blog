@@ -6,6 +6,10 @@ class Blog
     @entries = []
   end
 
+  def add_entry(entry)
+    entries << entry
+  end
+
   def new_post
     post_maker.call.tap do |post|
       post.blog = self

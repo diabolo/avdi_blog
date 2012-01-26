@@ -3,3 +3,5 @@
     =@blog.title
   %h2.subtitle
     =@blog.subtitle
+  .entries
+    =render partial: "entry", collection: @blog.entries
