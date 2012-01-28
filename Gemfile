@@ -42,6 +42,7 @@ gem "ruby-debug19", require: 'ruby-debug'
 
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development, :test do
+  gem "ipsum"
   gem "rspec-rails"
   gem "cucumber-rails"
   gem 'database_cleaner'
