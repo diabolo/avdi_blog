@@ -10,8 +10,8 @@ class Blog
     entries << entry
   end
 
-  def new_post
-    post_maker.call.tap do |post|
+  def new_post(*args)
+    post_maker.call(*args).tap do |post|
       post.blog = self
     end
   end

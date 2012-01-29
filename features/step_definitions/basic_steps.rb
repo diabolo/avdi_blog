@@ -52,3 +52,7 @@ end
 Then /^I should see some entries$/ do
   page.should have_css ".entries .entry", :count => some
 end
+
+Then /^I should be able to create a new post$/ do
+  page.should have_css "a.new_post"
+end

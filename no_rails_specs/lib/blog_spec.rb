@@ -16,16 +16,30 @@ end
 
 describe "Blog#new_post" do
   let(:blog){Blog.new}
-  subject do
-    @new_post = OpenStruct.new
-    blog.post_maker = ->{ @new_post}
+  let(:post){double(Post)}
+  let(:post_maker){double('proc')}
+  let(:args){{:x => 42, :y => 'foo'}}
+
+  before :each do
+    blog.post_maker = post_maker
+  end
+
+  it "should delegate to the post_maker" do
+    post_maker.should_receive(:call).and_return(OpenStruct.new)
     blog.new_post
   end
-  it "should return a new post" do
-    should == @new_post
+
+  it "should accept an attribute hash and pass it on to the post maker" do
+    post_maker.should_receive(:call).with(args).and_return(OpenStruct.new)
+    expect{blog.new_post(args)}.to_not raise_error
   end
 
   it "should set the post's blog reference to itself" do
-    subject.blog.should == blog
+    post_maker.should_receive(:call).and_return(post)
+    post.should_receive(:blog=).with(blog)
+    blog.new_post
   end
+
 end
+
+
