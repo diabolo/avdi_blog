@@ -1,4 +1,5 @@
 require 'active_model'
+require 'date'
 require_relative "../../app/models/post"
 
 describe Post do
@@ -22,5 +23,23 @@ describe Post do
       subject.publish
     end
   end
+
+  context "before publishing" do
+    its(:pubdate){should be_nil}
+  end
+
+  context "after publishing" do
+    let(:now){DateTime.now}
+    let(:clock){stub(:now => now)}
+    before :each do
+      subject.blog = double(:add_entry => nil)
+      subject.publish(clock)
+    end
+    its(:pubdate){should be_kind_of(DateTime)}
+    it "pubdate should be correct" do
+      subject.pubdate.should == now
+    end
+  end
 end
+
 

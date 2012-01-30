@@ -7,8 +7,10 @@ Feature: New Posts
     When I view my blog
     Then I should be able to create a new post
 
+    @wip
   Scenario:
     When I submit a new post
     Then I should see my post has been added
+    And I should see when my post was added
 
 

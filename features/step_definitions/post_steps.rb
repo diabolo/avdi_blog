@@ -15,3 +15,9 @@ end
 Then /^I should see my post has been added$/ do
   page.should have_css ".blog .entry", :count => 1
 end
+
+Then /^I should see when my post was added$/ do
+  debugger
+  page.should have_css ".blog .entry time", :count => 1
+end
+
