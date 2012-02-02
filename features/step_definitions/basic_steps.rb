@@ -18,15 +18,15 @@ module BlogStepHelper
   end
 
   def add_some_entries
-    some.times do
-      blog.entries << new_post
+    some.times do |count|
+      blog.add_entry(blog.new_post(:title => count))
     end
   end
 
-  def new_post
-    blog.new_post.tap do |post|
-      post.title = "test post"
-      post.body = "lorem ipsum ..."
+  def new_post(*args)
+    blog.new_post(args[0]).tap do |post|
+      post.title ||= "test post"
+      post.body ||= "lorem ipsum ..."
     end
   end
 
@@ -34,6 +34,11 @@ module BlogStepHelper
     3
   end
 
+  def should_see_entries_in_order
+    # this is pretty hacky, but the spec should cover it better
+    titles = page.all('.entry .title').collect{|entry| entry.text}
+    titles.should == titles.sort.reverse
+  end
 end
 World(BlogStepHelper)
 
@@ -56,3 +61,8 @@ end
 Then /^I should be able to create a new post$/ do
   page.should have_css "a.new_post"
 end
+
+Then /^I should entries sorted in reverse chronological order$/ do
+  should_see_entries_in_order
+end
+

@@ -1,3 +1,4 @@
 Before do
-  THE_BLOG = Blog.new
+  # empty the blog before each scenario
+  THE_BLOG.send(:initialize)
 end

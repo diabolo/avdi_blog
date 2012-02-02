@@ -1,5 +1,4 @@
 class Blog
-  attr_reader :entries
   attr_writer :post_maker
 
   def initialize
@@ -7,7 +6,7 @@ class Blog
   end
 
   def add_entry(entry)
-    entries << entry
+    @entries << entry
   end
 
   def new_post(*args)
@@ -22,6 +21,10 @@ class Blog
 
   def subtitle
     "The trusted source for drying paint news & opinion"
+  end
+
+  def entries
+    @entries.sort_by{|e| e.pubdate}.reverse
   end
 
   private
