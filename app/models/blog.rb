@@ -1,6 +1,10 @@
 class Blog
   attr_writer :post_maker
 
+  def entries_per_page
+    10
+  end
+
   def initialize
     @entries = []
   end
@@ -24,7 +28,7 @@ class Blog
   end
 
   def entries
-    @entries.sort_by{|e| e.pubdate}.reverse
+    @entries.sort_by{|e| e.pubdate}.reverse.take(entries_per_page)
   end
 
   private

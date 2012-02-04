@@ -12,3 +12,9 @@ Feature: View blog
     Given my blog has some entries
     When I view my blog
     Then I should entries sorted in reverse chronological order
+
+  Scenario: Limiting entries displayed
+    Given my blog has loads of entries
+    When I view my blog
+    Then I should see a limited number of entries
+
