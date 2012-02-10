@@ -12,4 +12,9 @@ Feature: New Posts
     Then I should see my post has been added
     And I should see when my post was added
 
+    @wip
+  Scenario:
+    When I submit a new post without a title
+    Then I should see my new post has not been added
+    Then I should see an error about the title
 

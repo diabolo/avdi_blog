@@ -3,8 +3,16 @@ require 'date'
 require_relative "../../app/models/post"
 
 describe Post do
+  let(:post){Post.new(title: 'title', body: 'lorem')}
   %w(title body blog).each do |rw|
     it {should respond_to(rw.to_sym, "#{rw}=".to_sym)}
+  end
+
+  %w(title).each do |v|
+    it "should be invalid with empty #{v}" do
+      post.send("#{v}=",'')
+      post.should_not be_valid
+    end
   end
 
   describe "#new" do
@@ -16,11 +24,22 @@ describe Post do
   end
 
   describe "#publish" do
+    context "invalid post" do
+      before do
+        post.should_receive(:valid?).and_return(false)
+      end
+      it "should not add itself to its blog" do
+        blog = double(Blog)
+        post.blog = blog
+        blog.should_not_receive :add_entry
+        post.publish
+      end
+    end
     it "should add itself to its blog" do
       blog = double(Blog)
-      subject.blog = blog
+      post.blog = blog
       blog.should_receive :add_entry
-      subject.publish
+      post.publish
     end
   end
 
@@ -32,12 +51,13 @@ describe Post do
     let(:now){DateTime.now}
     let(:clock){stub(:now => now)}
     before :each do
-      subject.blog = double(:add_entry => nil)
-      subject.publish(clock)
+      post.blog = double(:add_entry => nil)
+      post.publish(clock)
     end
+    subject{post}
     its(:pubdate){should be_kind_of(DateTime)}
     it "pubdate should be correct" do
-      subject.pubdate.should == now
+      post.pubdate.should == now
     end
   end
 end
