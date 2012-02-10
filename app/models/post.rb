@@ -3,7 +3,7 @@ class Post
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  attr_accessor :title, :body, :blog, :pubdate
+  attr_accessor :title, :body, :blog, :pubdate, :image_url
   validates :title, presence: true
 
   def initialize(attrs={})

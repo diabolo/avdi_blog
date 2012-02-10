@@ -4,7 +4,7 @@ require_relative "../../app/models/post"
 
 describe Post do
   let(:post){Post.new(title: 'title', body: 'lorem')}
-  %w(title body blog).each do |rw|
+  %w(title body blog image_url).each do |rw|
     it {should respond_to(rw.to_sym, "#{rw}=".to_sym)}
   end
 
@@ -29,14 +29,14 @@ describe Post do
         post.should_receive(:valid?).and_return(false)
       end
       it "should not add itself to its blog" do
-        blog = double(Blog)
+        blog = double(:blog)
         post.blog = blog
         blog.should_not_receive :add_entry
         post.publish
       end
     end
     it "should add itself to its blog" do
-      blog = double(Blog)
+      blog = double(:blog)
       post.blog = blog
       blog.should_receive :add_entry
       post.publish

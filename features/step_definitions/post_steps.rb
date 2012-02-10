@@ -6,6 +6,18 @@ module PostSH
     click_button 'Create Post'
   end
 
+  def create_post_with_picture
+    visit new_post_path
+    fill_in 'post_title', :with => "Title"
+    fill_in 'post_body', :with => 2.sentences
+    fill_in 'post_image_url', with: path_to_image
+    click_button 'Create Post'
+  end
+
+  def path_to_image
+    "wet_paint.jpeg"
+  end
+
   def create_post_without_title
     visit new_post_path
     fill_in 'post_title', :with => ''
@@ -35,6 +47,10 @@ When /^I submit a new post$/ do
   create_post
 end
 
+When /^I submit a new post with a picture$/ do
+  create_post_with_picture
+end
+
 When /^I submit a new post without a title$/ do
   create_post_without_title
 end
@@ -55,5 +71,9 @@ end
 Then /^I should see an error about the title$/ do
   form_should_have_error_message
   form_has_error_for?('title').should be_true
+end
+
+Then /^I should see my post's picture$/ do
+  page.should have_css "img[src='#{path_to_image}']"
 end
 
