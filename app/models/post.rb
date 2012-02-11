@@ -19,4 +19,8 @@ class Post
     @pubdate = clock.now
     blog.add_entry(self)
   end
+
+  def picture?
+    image_url.present?
+  end
 end

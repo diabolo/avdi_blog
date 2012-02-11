@@ -23,6 +23,19 @@ describe Post do
     end
   end
 
+  describe "picture?" do
+    it "should be true when post has an image_url" do
+      post.image_url = "foo.png"
+      post.picture?.should be_true
+    end
+
+    it "should be false when post has no image_url" do
+      post.image_url = ''
+      post.picture?.should be false
+    end
+  end
+
+
   describe "#publish" do
     context "invalid post" do
       before do

@@ -1,7 +1,5 @@
+- entry = exhibit(entry, self)
 .entry
   %time= entry.pubdate
   %h3.title= entry.title
-  %p.body
-    =entry.body
-  -if entry.image_url
-    =render partial: '/posts/picture_body', locals: {post: entry}
+  =entry.render_body

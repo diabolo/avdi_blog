@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+#  helper :exhibits
+
   before_filter :init_blog
 
   private

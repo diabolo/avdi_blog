@@ -77,3 +77,6 @@ Then /^I should see my post's picture$/ do
   page.should have_css "img[src='#{path_to_image}']"
 end
 
+Then /^my post's picture should have a caption$/ do
+  page.should have_css "figcaption"
+end

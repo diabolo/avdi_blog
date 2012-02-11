@@ -21,3 +21,4 @@ Feature: New Posts
     When I submit a new post with a picture
     Then I should see my post has been added
     And I should see my post's picture
+    And my post's picture should have a caption
