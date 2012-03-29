@@ -36,6 +36,11 @@ describe Blog do
 
       blog.entries.should == [newest, middle, oldest]
     end
+
+    it "should limit the entries returned" do
+      (2*blog.entries_per_page).times{blog.add_entry(stub_entry)}
+      blog.entries.count.should == blog.entries_per_page
+    end
   end
 
   describe "#new_post" do
@@ -52,7 +57,7 @@ describe Blog do
       blog.new_post
     end
 
-    it "should accept an attribute hash and pass it on to the post maker" do
+    it "should accept an attribute hash and pass it on to the post source" do
       post_source.should_receive(:call).with(args).and_return(OpenStruct.new)
       expect{blog.new_post(args)}.to_not raise_error
     end
