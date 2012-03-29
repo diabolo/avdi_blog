@@ -1,5 +1,5 @@
 class Blog
-  attr_writer :post_maker
+  attr_writer :post_source
 
   def entries_per_page
     10
@@ -14,7 +14,7 @@ class Blog
   end
 
   def new_post(*args)
-    post_maker.call(*args).tap do |post|
+    post_source.call(*args).tap do |post|
       post.blog = self
     end
   end
@@ -33,7 +33,7 @@ class Blog
 
   private
 
-  def post_maker
-    @post_maker ||= Post.public_method(:new)
+  def post_source
+    @post_source ||= Post.public_method(:new)
   end
 end
