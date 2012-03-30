@@ -33,7 +33,8 @@ The following occur all the time in standard rails controllers
 
 This creates a lone wolf, on object that is not part of any hierarchy. This
 makes testing much more painful (not that I do controller tests). Instead all
-object should come from methods called on existing objects e.g.
+object should come from methods called on existing objects, so a FooController
+should do something like
 
     foo = @blog.new_foo
 
