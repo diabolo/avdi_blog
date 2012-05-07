@@ -45,9 +45,6 @@ gem "ruby-debug19", require: 'ruby-debug'
 group :development, :test do
   gem "ipsum"
   gem "rspec-rails"
-  gem "cucumber-rails"
-  gem 'database_cleaner'
-  gem 'coderay'
   #gem 'fabrication'
   platform :ruby_18 do
     gem "ruby-debug"
@@ -57,4 +54,8 @@ group :development, :test do
     gem "ruby-debug19", :require => 'ruby-debug'
   end
 end
-
+group :test do 
+  gem "cucumber-rails"
+  gem "database_cleaner"
+  gem "coderay"
+end
