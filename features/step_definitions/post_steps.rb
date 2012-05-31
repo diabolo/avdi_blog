@@ -74,7 +74,7 @@ Then /^I should see an error about the title$/ do
 end
 
 Then /^I should see my post's picture$/ do
-  page.should have_css "img[src='#{path_to_image}']"
+  page.should have_css 'div.entry figure img'
 end
 
 Then /^my post's picture should have a caption$/ do
