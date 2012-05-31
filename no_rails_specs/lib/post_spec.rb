@@ -4,6 +4,7 @@ require_relative "../../app/models/post"
 
 describe Post do
   let(:post){Post.new(title: 'title', body: 'lorem')}
+
   %w(title body blog image_url).each do |rw|
     it {should respond_to(rw.to_sym, "#{rw}=".to_sym)}
   end

@@ -17,11 +17,4 @@ describe TextPostExhibit do
     text_post_exhibit.render_body
   end
 
-  describe ".match?" do
-    let(:text_post){Post.new.tap{|post| post.stub(:picture?).and_return(false)}}
-    it "true if object is a Post without a picture" do
-      TextPostExhibit.match?(text_post).should be_true
-    end
-  end
-
 end

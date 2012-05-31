@@ -17,12 +17,5 @@ describe PicturePostExhibit do
     ppe.render_body
   end
 
-  describe ".match?" do
-    let(:picture_post){Post.new.tap{|post| post.stub(:picture?).and_return(true)}}
-    it "true if object is a Post with a picture" do
-      PicturePostExhibit.match?(picture_post).should be_true
-    end
-  end
-
 end
 

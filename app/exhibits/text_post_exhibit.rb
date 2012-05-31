@@ -1,7 +1,7 @@
 require_relative 'exhibit'
 
 class TextPostExhibit < Exhibit
-  def self.match?(object)
+  def self.applicable_to?(object)
     object.is_a?(Post) and !object.picture?
   end
 

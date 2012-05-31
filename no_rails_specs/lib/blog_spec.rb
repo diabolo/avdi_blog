@@ -44,7 +44,7 @@ describe Blog do
   end
 
   describe "#new_post" do
-    let(:post){double(Post)}
+    let(:post){double('post')}
     let(:post_source){double('proc')}
     let(:args){{:x => 42, :y => 'foo'}}
 
@@ -52,8 +52,11 @@ describe Blog do
       blog.post_source = post_source
     end
 
+    # For the first two tests the call to post_source has to return a stub that
+    # can recieve any calls without requiring expectations for the calls. We can
+    # do this with stub.as_null_object or with OpenStruct.new
     it "should delegate to the post_source" do
-      post_source.should_receive(:call).and_return(OpenStruct.new)
+      post_source.should_receive(:call).and_return(stub.as_null_object)
       blog.new_post
     end
 
